@@ -1,0 +1,8 @@
+document.addEventListener('DOMContentLoaded',()=>{
+const filters=[...document.querySelectorAll('.filter')],cards=[...document.querySelectorAll('.project-card')];
+filters.forEach(btn=>btn.addEventListener('click',()=>{filters.forEach(x=>x.classList.toggle('active',x===btn));cards.forEach(card=>card.hidden=btn.dataset.filter!=='todos'&&card.dataset.category!==btn.dataset.filter)}));
+const dialog=document.getElementById('projectDialog'),img=document.getElementById('dialogImage'),title=document.getElementById('dialogTitle'),desc=document.getElementById('dialogDescription'),meta=document.getElementById('dialogMeta'),gallery=document.getElementById('caseGallery');
+document.querySelectorAll('.project-open').forEach(btn=>btn.addEventListener('click',()=>{const card=btn.closest('.project-card');img.src=card.dataset.image;img.alt=btn.querySelector('img').alt;title.textContent=card.dataset.title;desc.textContent=card.dataset.description;meta.textContent=card.dataset.meta;gallery.hidden=card.dataset.gallery!=='true';dialog.showModal()}));
+document.querySelector('.dialog-close').addEventListener('click',()=>dialog.close());dialog.addEventListener('click',e=>{if(e.target===dialog)dialog.close()});
+const toggle=document.querySelector('.menu-toggle'),nav=document.querySelector('.main-nav');if(toggle&&nav){toggle.addEventListener('click',()=>{const open=toggle.getAttribute('aria-expanded')==='true';toggle.setAttribute('aria-expanded',String(!open));nav.classList.toggle('open',!open)});nav.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{nav.classList.remove('open');toggle.setAttribute('aria-expanded','false')}))}
+});
